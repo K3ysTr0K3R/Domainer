@@ -32,4 +32,4 @@ done
 rm subdomains
 whoami=$(whoami)
 
-echo "\e[93m[*] All Done $whoami, thank for using Domainer"
+echo "\e[93m[*] All Done $whoami, thanks for using Domainer"
