@@ -1,5 +1,6 @@
 #!/bin/bash
 
+trap 'echo "[*] Cleaning up"; rm subdomains.txt; exit' INT
 clear
 echo ""
 echo -e "\e[93m########################"
@@ -13,7 +14,7 @@ if [ -z "$1" ]; then
 fi
 
 echo "[i] Finding subdomains for $1 using assetfinder"
-assetfinder $1 > subdomains
+assetfinder $1 > subdomains.txt
 echo "[i] Checking if subdomains are online or offline"
 echo ""
 while read -r domain; do
@@ -23,8 +24,8 @@ while read -r domain; do
 	else
 		echo -e "\e[91m[~] $domain <------> Offline"
 	fi
-done < subdomains
+done < subdomains.txt
 echo "[*] Cleaning up"
-rm subdomains
+rm subdomains.txt
 echo "[*] All done, thanks for using Domainer, $(whoami)!"
 
