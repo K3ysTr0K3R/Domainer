@@ -2,34 +2,31 @@
 
 clear
 
-echo -e "\e[93m -------------------------------------- "
-echo "| Coded By: K3ysTr0K3R                 |"
-echo "|                                      |"
-echo "| I am not responsible for any misuse  |"
-echo "| of this program.                     |"
-echo " -------------------------------------- "
-
-echo " ======== "
-echo "|Domainer|"
-echo " ======== "
+echo -e "\e[93m#############################################"
+echo "#Coded By: K3ysTr0K3R"
+echo "I am not responsible for any misuse"
+echo "of this program."
 
 if [ -z "$1" ]; then
-	echo "[*] You Must Enter A domain NAME!"
-	exit 1
+	echo "[!] Error: You must enter a domain name or a keyword."
+	echo "[!] Example Usage: ./domainer.sh (domain/keyword)"
+	exit
 fi
 
+echo "[i] Finding subdomains for $1 using assetfinder"
 assetfinder $1 > subdomains
+echo "[i] Checking if subdomains are online or offline"
+echo ""
+while read -r domain; do
+	status_code=$(curl -L -s -o /dev/null -w "%{http_code}" $domain)
+	if [ "$status_code" -eq 200 ]; then
+		echo -e "\e[96m[*] $domain <------> Online"
+	else
+		echo -e "\e[91m[~] $domain <------> Offline"
+	fi
 
-for domain in $(cat subdomains); do
-	if curl -s $domain &> /dev/null
-then
-	echo -e "\e[96m[*] $domain <------> {Online}"
-else
-	echo -e "\e[91m[~] $domain <------> {Offline}"
-fi
-done
-
+done < subdomains
+echo "[*] Cleaning up..."
 rm subdomains
-whoami=$(whoami)
+echo "[*] All done, thanks for using Domainer, $(whoami)!"
 
-echo "\e[93m[*] All Done $whoami, thanks for using Domainer"
