@@ -37,7 +37,7 @@ fi
 
 echo "[i] Finding domains for $1 using assetfinder"
 assetfinder $1 > subdomains.txt
-echo "[i] Checking if subdomains are online or offline"
+echo "[i] Checking if domains are online or offline"
 echo ""
 while read -r domain; do
 	status_code=$(curl -L -s -o /dev/null -w "%{http_code}" $domain)
