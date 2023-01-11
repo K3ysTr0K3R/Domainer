@@ -1,6 +1,6 @@
 #!/bin/bash
 
-trap 'echo "[i] echo "User aborted the script"; echo "[i] Cleaning up" rm subdomains.txt; exit' INT
+trap 'echo "[i] User aborted the script"; echo "[i] Cleaning up"; rm subdomains.txt; exit' INT
 clear
 banner(){
 echo ""
