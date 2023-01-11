@@ -1,7 +1,7 @@
 #!/bin/bash
 
 clear
-
+echo ""
 echo -e "\e[93m########################"
 echo -e "\e[93m# Coded By: K3ysTr0K3R #"
 echo -e "\e[93m########################"
