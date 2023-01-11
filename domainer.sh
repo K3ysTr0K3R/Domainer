@@ -24,7 +24,7 @@ while read -r domain; do
 		echo -e "\e[91m[~] $domain <------> Offline"
 	fi
 done < subdomains
-echo "[*] Cleaning up..."
+echo "[*] Cleaning up"
 rm subdomains
 echo "[*] All done, thanks for using Domainer, $(whoami)!"
 
