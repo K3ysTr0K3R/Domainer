@@ -3,9 +3,10 @@
 clear
 
 echo -e "\e[93m#############################################"
-echo "#Coded By: K3ysTr0K3R"
-echo "I am not responsible for any misuse"
-echo "of this program."
+echo -e "\e[93m# Coded By: K3ysTr0K3R                      #"
+echo -e "\e[93m# I am not responsible for any misuse       #"
+echo -e "\e[93m# of this program.                          #"
+echo -e "\e[93m#############################################"
 
 if [ -z "$1" ]; then
 	echo "[!] Error: You must enter a domain name or a keyword."
