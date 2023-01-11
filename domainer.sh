@@ -2,6 +2,7 @@
 
 trap 'echo "[i] echo "User aborted the script"; echo "[i] Cleaning up" rm subdomains.txt; exit' INT
 clear
+banner(){
 echo ""
 echo -e "\e[93m########################"
 echo -e "\e[93m# Coded By: K3ysTr0K3R #"
@@ -15,7 +16,8 @@ echo '$$ |  $$ |$$ /  $$ |$$ / $$ / $$ | $$$$$$$ |$$ |$$ |  $$ |$$$$$$$$ |$$ |  
 echo '$$ |  $$ |$$ |  $$ |$$ | $$ | $$ |$$  __$$ |$$ |$$ |  $$ |$$   ____|$$ |'
 echo '$$$$$$$  |\$$$$$$  |$$ | $$ | $$ |\$$$$$$$ |$$ |$$ |  $$ |\$$$$$$$\ $$ |'
 echo '\_______/  \______/ \__| \__| \__| \_______|\__|\__|  \__| \_______|\__|'
-
+}
+banner
 if [ -z "$1" ]; then
 	echo "[!] You must enter a domain name or a keyword."
 	echo "[!] Example Usage: ./domainer.sh (domain/keyword)"
