@@ -16,8 +16,19 @@ echo '$$ |  $$ |$$ /  $$ |$$ / $$ / $$ | $$$$$$$ |$$ |$$ |  $$ |$$$$$$$$ |$$ |  
 echo '$$ |  $$ |$$ |  $$ |$$ | $$ | $$ |$$  __$$ |$$ |$$ |  $$ |$$   ____|$$ |'
 echo '$$$$$$$  |\$$$$$$  |$$ | $$ | $$ |\$$$$$$$ |$$ |$$ |  $$ |\$$$$$$$\ $$ |'
 echo '\_______/  \______/ \__| \__| \__| \_______|\__|\__|  \__| \_______|\__|'
+echo ""
 }
 banner
+echo -e "[!] Checking Internet Connection"
+wget -q --tries=10 --timeout=5 http://www.google.com -O /tmp/index.google &> /dev/null
+if [ ! -s /tmp/index.google ]; then
+	echo -e "[~] No Internet Connection Found: Failed"
+	echo -e "[?] Check Your Internet Connection Or Restart: domainer"
+	exit
+else
+	echo -e "[i] Internet Connection Found: Proceeding"
+fi
+
 if [ -z "$1" ]; then
 	echo "[!] You must enter a domain name or a keyword."
 	echo "[!] Example Usage: ./domainer.sh (domain/keyword)"
@@ -39,4 +50,3 @@ done < subdomains.txt
 echo "[i] Cleaning up"
 rm subdomains.txt
 echo "[*] All done, thanks for using Domainer, $(whoami)!"
-
