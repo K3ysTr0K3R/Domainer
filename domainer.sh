@@ -1,13 +1,16 @@
 #!/bin/bash
 
-trap 'echo "[i] User aborted the script"; echo "[i] Cleaning up"; rm subdomains.txt; exit' INT
-clear
+RED='\033[0;31m'
+CYAN='\033[0;36m'
+BLUE='\033[0;34m'
+GREEN='\033[0;32m'
+YELLOW='\e[93m'
+LIGHT_CYAN='\e[96m'
+
+trap 'echo -e "${YELLOW}[${CYAN}i${YELLOW}] User aborted the script"; echo -e "${YELLOW}[${CYAN}i${YELLOW}] Cleaning up"; rm subdomains.txt; exit' INT
 banner(){
-	echo ""
-	echo -e "\e[93m########################"
-	echo -e "\e[93m# Coded By: K3ysTr0K3R #"
-	echo -e "\e[93m########################"
-	echo ""
+        clear
+	echo -e "${YELLOW}"
 	echo '$$$$$$$\                                    $$\'
 	echo '$$  __$$\                                   \__|'
 	echo '$$ |  $$ | $$$$$$\  $$$$$$\$$$$\   $$$$$$\  $$\ $$$$$$$\   $$$$$$\   $$$$$$\'
@@ -17,36 +20,43 @@ banner(){
 	echo '$$$$$$$  |\$$$$$$  |$$ | $$ | $$ |\$$$$$$$ |$$ |$$ |  $$ |\$$$$$$$\ $$ |'
 	echo '\_______/  \______/ \__| \__| \__| \_______|\__|\__|  \__| \_______|\__|'
 	echo ""
+	echo -e "${YELLOW}[${GREEN}!!!${YELLOW}] ${BLUE}Tool-Name ${YELLOW}: ${CYAN}Domainer"
+	echo -e "${YELLOW}[${GREEN}!!!${YELLOW}] ${BLUE}Github    ${YELLOW}: ${CYAN}https://github.com/K3ysTr0K3R"
+	echo -e "${YELLOW}[${GREEN}!!!${YELLOW}] ${BLUE}Instagram ${YELLOW}: ${CYAN}jaredbrts175"
+	echo -e "${YELLOW}[${GREEN}!!!${YELLOW}] ${BLUE}Coded By  ${YELLOW}: ${CYAN}K3ysTr0K3R"
+        echo ""
 }
 banner
-echo -e "[!] Checking Internet Connection"
+if [ -z "$1" ]; then
+        echo -e "${YELLOW}[${GREEN}!${YELLOW}] You must enter a domain name or a keyword"
+        echo -e "${YELLOW}[${GREEN}!${YELLOW}] Example Usage${CYAN}: ${BLUE}./domainer.sh (${RED}domain${BLUE}/${RED}keyword${BLUE})"
+        exit
+fi
+
+echo -e "${YELLOW}[${CYAN}i${YELLOW}] Checking Internet Connection"
 wget -q --tries=10 --timeout=5 http://www.google.com -O /tmp/index.google &> /dev/null
 if [ ! -s /tmp/index.google ]; then
-	echo -e "[~] No Internet Connection Found: Failed"
-	echo -e "[?] Check Your Internet Connection Or Restart: domainer"
+	echo -e "${YELLOW}[{RED}~{YELLOW}] No Internet Connection Found${CYAN}: ${RED}Failed"
+	echo -e "${YELLOW}[{BLUE}?{YELLOW}] Check Your Internet Connection Or Restart${CYAN}: ${BLUE}Domainer"
 	exit
 else
-	echo -e "[i] Internet Connection Found: Proceeding"
+	echo -e "${YELLOW}[${CYAN}i${YELLOW}] Internet Connection Found${CYAN}: ${BLUE}Proceeding"
 fi
 
-if [ -z "$1" ]; then
-	echo "[!] You must enter a domain name or a keyword."
-	echo "[!] Example Usage: ./domainer.sh (domain/keyword)"
-	exit
-fi
-
-echo "[i] Finding domains for $1 using assetfinder"
+sleep 2
+banner
+echo -e "${YELLOW}[${CYAN}i${YELLOW}] Finding ${RED}$1 ${YELLOW}domains"
 assetfinder $1 > subdomains.txt
-echo "[i] Checking if domains are online or offline"
+echo -e "${YELLOW}[${CYAN}i${YELLOW}] Checking if domains are online or offline"
 echo ""
 while read -r domain; do
 	status_code=$(curl -L -s -o /dev/null -w "%{http_code}" $domain)
 	if [ "$status_code" -eq 200 ]; then
-		echo -e "\e[96m[*] $domain <------> Online"
+		echo -e "${YELLOW}[${LIGHT_CYAN}*${YELLOW}] ${LIGHT_CYAN}$domain <------> Online"
 	else
-		echo -e "\e[91m[~] $domain <------> Offline"
+		echo -e "${YELLOW}[${RED}~${YELLOW}] ${RED}$domain <------> Offline"
 	fi
 done < subdomains.txt
-echo "[i] Cleaning up"
+echo -e "${YELLOW}[${CYAN}i${YELLOW}] Cleaning up"
 rm subdomains.txt
-echo "[*] All done, thanks for using Domainer, $(whoami)!"
+echo -e "${YELLOW}[${BLUE}*${YELLOW}] All done, thanks for using Domainer, ${CYAN}$(whoami)!"
