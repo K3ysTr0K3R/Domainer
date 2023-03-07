@@ -22,7 +22,7 @@ banner(){
 	echo ""
 	echo -e "${YELLOW}[${GREEN}!!!${YELLOW}] ${BLUE}Tool-Name ${YELLOW}: ${CYAN}Domainer"
 	echo -e "${YELLOW}[${GREEN}!!!${YELLOW}] ${BLUE}Github    ${YELLOW}: ${CYAN}https://github.com/K3ysTr0K3R"
-	echo -e "${YELLOW}[${GREEN}!!!${YELLOW}] ${BLUE}Instagram ${YELLOW}: ${CYAN}jaredbrts175"
+	echo -e "${YELLOW}[${GREEN}!!!${YELLOW}] ${BLUE}Instagram ${YELLOW}: ${CYAN}1_k3ystr0k3r_1"
 	echo -e "${YELLOW}[${GREEN}!!!${YELLOW}] ${BLUE}Coded By  ${YELLOW}: ${CYAN}K3ysTr0K3R"
         echo ""
 }
