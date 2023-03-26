@@ -36,8 +36,8 @@ fi
 echo -e "${YELLOW}[${CYAN}i${YELLOW}] Checking Internet Connection"
 wget -q --tries=10 --timeout=5 http://www.google.com -O /tmp/index.google &> /dev/null
 if [ ! -s /tmp/index.google ]; then
-	echo -e "${YELLOW}[{RED}~{YELLOW}] No Internet Connection Found${CYAN}: ${RED}Failed"
-	echo -e "${YELLOW}[{BLUE}?{YELLOW}] Check Your Internet Connection Or Restart${CYAN}: ${BLUE}Domainer"
+	echo -e "${YELLOW}[${RED}~${YELLOW}] No Internet Connection Found${CYAN}: ${RED}Failed"
+	echo -e "${YELLOW}[${BLUE}?${YELLOW}] Check Your Internet Connection Or Restart${CYAN}: ${BLUE}Domainer"
 	exit
 else
 	echo -e "${YELLOW}[${CYAN}i${YELLOW}] Internet Connection Found${CYAN}: ${BLUE}Proceeding"
@@ -50,7 +50,7 @@ assetfinder $1 > subdomains.txt
 echo -e "${YELLOW}[${CYAN}i${YELLOW}] Checking if domains are online or offline"
 echo ""
 while read -r domain; do
-	status_code=$(curl -L -s -o /dev/null -w "%{http_code}" $domain)
+	status_code=$(curl -L -s -o /dev/null --connect-timeout 3 -w "%{http_code}" $domain)
 	if [ "$status_code" -eq 200 ]; then
 		echo -e "${YELLOW}[${LIGHT_CYAN}*${YELLOW}] ${LIGHT_CYAN}$domain <------> Online"
 	else
